@@ -3,6 +3,8 @@ h1 Spaghetti
 
 div
 	input(type="text" v-model="spaghetti" maxlength="500")
+div(style="margin-top: 15px;")
+	button(type="button" @click="randomize") Randomize my spaghetti
 
 div(style="margin-top: 15px;")
 	svg(xmlns="http://www.w3.org/2000/svg" :width="svgWidth" :height="svgHeight")
@@ -107,6 +109,18 @@ function pushFront(arr: Array<ISpaghettiPart>, img: string, y: number) {
 interface ISpaghettiPart {
 	img: string;
 	y: number;
+}
+
+const randoms = ["ghe", "s", "spa", "tti"];
+
+function randomize() {
+	var newSpaghetti = "";
+	const iterations = Math.floor(Math.random() * 50) + 1;
+	for (let i = 0; i < iterations; i++) {
+		const rng = Math.floor(Math.random() * randoms.length);
+		newSpaghetti += randoms[rng];
+	}
+	spaghetti.value = newSpaghetti;
 }
 </script>
 
