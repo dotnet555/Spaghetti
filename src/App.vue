@@ -25,8 +25,6 @@ import spaghet from "/spaghet.png";
 
 const spaghetti = ref("spaghetti");
 
-const invalidSpaghetti = [{ img: "/spaghet.png", y: 0 }];
-
 const imagesWidth = 264;
 const svgWidth = 400;
 const imagesX = svgWidth / 2 - imagesWidth / 2;
@@ -42,6 +40,8 @@ const imgs: Record<string, any> = {
 	tti: tti,
 	spaghet: spaghet,
 };
+
+const invalidSpaghetti = [{ img: imgs["spaghet"], y: 0 }];
 
 watch(
 	() => spaghetti.value,
