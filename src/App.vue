@@ -17,11 +17,11 @@ div(style="margin-top: 15px;")
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-import ghe from "../public/ghe.png";
-import s from "../public/s.png";
-import spa from "../public/spa.png";
-import tti from "../public/tti.png";
-import spaghet from "../public/spaghet.png";
+import ghe from "/ghe.png";
+import s from "/s.png";
+import spa from "/spa.png";
+import tti from "/tti.png";
+import spaghet from "/spaghet.png";
 
 const spaghetti = ref("spaghetti");
 
