@@ -2,10 +2,10 @@
 h1 Spaghetti
 
 div
-	input(type="text" v-model="spaghetti" maxlength="100")
+	input(type="text" v-model="spaghetti" maxlength="500")
 
 div(style="margin-top: 15px;")
-	svg(xmlns="http://www.w3.org/2000/svg" :width="svgWidth" height="600")
+	svg(xmlns="http://www.w3.org/2000/svg" :width="svgWidth" :height="svgHeight")
 		image(
 			v-for="p in spaghettiParts"
 			:href="p.img"
@@ -16,7 +16,7 @@ div(style="margin-top: 15px;")
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import ghe from "/ghe.png";
 import s from "/s.png";
 import spa from "/spa.png";
@@ -28,6 +28,16 @@ const spaghetti = ref("spaghetti");
 const imagesWidth = 264;
 const svgWidth = 400;
 const imagesX = svgWidth / 2 - imagesWidth / 2;
+const partsOffset = 15;
+
+const svgHeight = computed(() => {
+	var partsCount = spaghettiParts.value.length;
+	let height = partsCount * partsOffset + 150;
+
+	if (height < 400) height = 400;
+
+	return height;
+});
 
 const spaghettiParts = ref(new Array<ISpaghettiPart>());
 
@@ -65,7 +75,7 @@ function buildSpaghetti() {
 	if (spaghettiString.length == 0) return invalidSpaghetti;
 
 	let i = 0;
-	while (spaghettiString.length > 0 && i < 100) {
+	while (spaghettiString.length > 0 && i < 1000) {
 		i++;
 		let foundPart = null as string | null;
 
@@ -81,11 +91,11 @@ function buildSpaghetti() {
 
 		if (foundPart == null) return invalidSpaghetti;
 
-		pushFront(parts, imgs[foundPart], parts.length * 15);
+		pushFront(parts, imgs[foundPart], parts.length * partsOffset);
 		spaghettiString = spaghettiString.replace(foundPart, "");
 	}
 
-	if (i >= 100) return invalidSpaghetti;
+	if (i >= 1000) return invalidSpaghetti;
 
 	return parts;
 }
